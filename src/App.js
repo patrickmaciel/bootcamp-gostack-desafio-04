@@ -1,11 +1,10 @@
 import React from 'react';
-
 import './App.css';
 
-import anime from './assets/onepunch.jpg';
+import TechList from './components/TechList';
 
 function App() {
-  return <img src={anime} title='Anime' />
+  return <TechList />;
 }
 
 export default App;
