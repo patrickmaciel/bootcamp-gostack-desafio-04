@@ -6,11 +6,32 @@ class TechList extends Component {
   // static defaultProps = {
   //   tech: 'Padrão'
   // };
+  // static propTypes = {
+  // };
 
   state = {
     newTech: '',
-    techs: ['Javascript', 'Node.js', 'React.js', 'React Native']
+    techs: []
   };
+
+  componentDidMount() {
+    const techs = localStorage.getItem('techs');
+    if (techs) {
+      this.setState({ techs: JSON.parse(techs) });
+    }
+  }
+
+  componentDidUpdate(_, prevState) {
+    // this.props, this.state
+    if (prevState.techs !== this.state.techs) {
+      localStorage.setItem('techs', JSON.stringify(this.state.techs));
+    }
+    console.log('atualizou');
+  }
+
+  componentWillUnmount() {
+    console.log('deixou de existir');
+  }
 
   handleInputChange = e => {
     this.setState({ newTech: e.target.value });
@@ -40,7 +61,6 @@ class TechList extends Component {
                 tech={tech} 
                 onDelete={() => this.handleDelete(tech)} />
             ))}
-            <TechItem />
           </ul>
           
           <input
